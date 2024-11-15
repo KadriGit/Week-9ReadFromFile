@@ -18,13 +18,33 @@ static void ReadFromFile(string filePath)
 {
     if (File.Exists(filePath))
     {
-        String[] tempArray = File.ReadAllLines(filePath);
+        string[] tempArray = File.ReadAllLines(filePath);
         Console.WriteLine($"There are {tempArray.Length} lines in the file.");
+        Console.WriteLine("Do you want to see all lines or pick a random one ? all/random ");
+        string userChoice = Console.ReadLine();
 
-        DisplayDataFromArray(tempArray);
+        if (userChoice == "all")
+        {
+            DisplayDataFromArray(tempArray);
+        }
+        else if (userChoice == "random")
+        {
+            DisplayRandomElement(tempArray);
+        }
+        else
+        {
+            Console.WriteLine("Try again");
+        }
     }
     else
     {
         Console.WriteLine($"File was not found");
     }
+}
+
+static void DisplayRandomElement(string[] someArray)
+{
+    Random rnd = new Random();
+    int randomIndex = rnd.Next(0, someArray.Length);
+    Console.WriteLine(someArray[randomIndex]);
 }
