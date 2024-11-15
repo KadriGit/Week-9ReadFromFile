@@ -4,18 +4,27 @@ string fileName = "chuck.txt";
 
 string fullFilePath = Path.Combine(fileDrirectoryPath, fileName);
 
-if (File.Exists(fullFilePath))
-{
-    Console.WriteLine($"File{fileName} exists in {fileName}");
-   String[] chuckJokes =  File.ReadAllLines(fullFilePath);
-    Console.WriteLine($"There are {chuckJokes.Length} jokes about chuck Norris in the filr.");
+ReadFromFile(fullFilePath);
 
-    foreach(string joke in chuckJokes)
+static void DisplayDataFromArray(string[] someArray)
+{
+    foreach (string line in someArray)
     {
-        Console.WriteLine(joke);
+        Console.WriteLine(line);
     }
 }
-else
+
+static void ReadFromFile(string filePath)
 {
-    Console.WriteLine($"File{fileName} was not found");
+    if (File.Exists(filePath))
+    {
+        String[] tempArray = File.ReadAllLines(filePath);
+        Console.WriteLine($"There are {tempArray.Length} lines in the file.");
+
+        DisplayDataFromArray(tempArray);
+    }
+    else
+    {
+        Console.WriteLine($"File was not found");
+    }
 }
